@@ -2,6 +2,4 @@
 function ToDo() { 
     return null
 }
-export default ToDo;HTMLTableRowElem
-
-s 
+export default ToDo;
