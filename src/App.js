@@ -1,51 +1,32 @@
-import { useState } from "react";
-import ToDoForm from "./ToDoForm";
-import ToDo from "./ToDo";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import ToDoPage from "./pages/ToDoPages";
+
 
 function App() {
-  const [todos, setToDos] = useState([]);
-
-  const addTask = (userInput) => {
-    if (userInput) {
-      const newItem = {
-        id: Math.random().toString(36).substring(2, 9),
-        task: userInput,
-        complete: false,
-      };
-      setToDos([...todos, newItem]);
-    }
-  };
-
-  const removeTask = (id) => {
-    setToDos([...todos.filter((todo) => todo.id !== id)]);
-  };
-
-  const handleToggle = (id) => {
-    setToDos([
-      ...todos.map((todo) =>
-        todo.id === id ? { ...todo, complete: !todo.complete } : { ...todo }
-      ),
-    ]);
-  };
-
-  return (
-    <div className="App">
-      <header>
-        <h1>Список задач: {todos.length}</h1>
-      </header>
-      <ToDoForm addTask={addTask} />
-      {todos.map((todo) => {
-        return (
-          <ToDo
-            todo={todo}
-            key={todo.id}
-            toggleTask={handleToggle}
-            removeTask={removeTask}
-          />
-        );
-      })}
-    </div>
-  );
-}
+return (
+  <BrowserRouter>
+  <header>
+  <Link to={"/"}>
+    Главная
+    </Link>
+    <Link to={"/about"}>
+    Обо мне
+    </Link>
+  </header>
+  <Routes>
+    <Route path="/" element={<ToDoPage/>}/>
+    <Route path="/about" element={<h1>About</h1>}/>
+    <Route path="*" element={
+      <>
+      <h1>Не найдено</h1>
+      <Link to={'/'}>
+      На главную
+      </Link>
+      </>
+    }/>
+  </Routes>
+  </BrowserRouter>
+)
+};
 
 export default App;

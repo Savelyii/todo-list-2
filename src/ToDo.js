@@ -1,3 +1,5 @@
+import crossIcon from "./assets/close.png";
+
 function ToDo({ todo, toggleTask, removeTask }) {
   return (
     <div key={todo.id} className="item-todo">
@@ -8,7 +10,7 @@ function ToDo({ todo, toggleTask, removeTask }) {
         {todo.task}
       </div>
       <div className="item-delete" onClick={() => removeTask(todo.id)}>
-        X
+        <img src={crossIcon} alt="Удалить" className="delete-icon" />
       </div>
     </div>
   );
